@@ -46,6 +46,7 @@ export default {
     },
     [LOGIN_START](state) {
       state.user = null
+      state.errors = null
       state.isLoading = true
     },
     [LOGIN_FAILURE](state, payload) {
