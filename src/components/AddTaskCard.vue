@@ -1,14 +1,17 @@
 <template>
-   <transition appear>
+  <transition appear>
     <div class="add-Task task-item transition-box" @click="$emit('AddNote')">
       <el-card class="box-card" shadow="hover">
-        <div slot="header" class="clearfix add-Task__header">
-          Add Note
-        </div>
-          <el-button class="add-Task__btn" type="success" icon="el-icon-circle-plus-outline" circle></el-button>
+        <div slot="header" class="clearfix add-Task__header">Add Note</div>
+        <el-button
+          class="add-Task__btn"
+          type="success"
+          icon="el-icon-circle-plus-outline"
+          circle
+        ></el-button>
       </el-card>
     </div>
-   </transition>
+  </transition>
 </template>
 
 <script>
@@ -25,11 +28,11 @@ export default {
   font-size: 22px;
   color: #606266;
   font-weight: 500;
-  text-align: center
+  text-align: center;
 }
 .add-Task .el-card__body {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 .add-Task__btn {
   cursor: none;
