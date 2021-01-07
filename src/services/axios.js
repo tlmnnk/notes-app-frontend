@@ -2,7 +2,7 @@ import axios from 'axios'
 import { JWT_TOKEN_NAME } from '../helpers/vars'
 import LocalStorageAdapter from '../helpers/localStorageAdapter'
 
-axios.defaults.baseURL = 'http://localhost:3000/'
+axios.defaults.baseURL = 'https://warm-crag-82428.herokuapp.com/'
 
 axios.interceptors.request.use((config) => {
   const token = LocalStorageAdapter.get(JWT_TOKEN_NAME)
