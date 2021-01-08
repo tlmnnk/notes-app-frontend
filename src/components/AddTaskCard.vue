@@ -34,7 +34,4 @@ export default {
   display: flex;
   justify-content: center;
 }
-.add-Task__btn {
-  cursor: none;
-}
 </style>
