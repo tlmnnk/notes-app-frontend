@@ -2,9 +2,12 @@
   <div>
     <div class="container">
       <div v-if="isLoggedIn">
-        <div class="tasks_container">
-          <AddTaskCard @AddNote="$emit('AddNote')" @closeModal="$emit('closeModal')" />
-          <Task @deleteTask="deleteTaskById" v-for="task in tasks" :key="task.id" :task="task" />
+        <div>
+          <div v-if="isLoading" class="tasks__loading"></div>
+          <div v-else class="tasks_container">
+            <AddTaskCard @AddNote="$emit('AddNote')" @closeModal="$emit('closeModal')" />
+            <Task @deleteTask="deleteTaskById" v-for="task in tasks" :key="task.id" :task="task" />
+          </div>
         </div>
       </div>
       <div v-else class="tasks__empty">Please, sign in to see your tasks</div>
@@ -14,6 +17,7 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import { Loading } from 'element-ui'
 import Task from '../components/Task'
 import AddTaskCard from '../components/AddTaskCard'
 
@@ -25,7 +29,7 @@ export default {
   },
   computed: {
     ...mapGetters('auth', ['isLoggedIn']),
-    ...mapGetters('task', ['tasks']),
+    ...mapGetters('task', ['tasks', 'isLoading']),
   },
   methods: {
     ...mapActions('task', ['getTasks', 'deleteTask']),
@@ -35,6 +39,17 @@ export default {
   },
   mounted() {
     this.getTasks()
+  },
+  updated() {
+    if (this.isLoading) {
+      this.loadingInstance = Loading.service({
+        target: '.tasks__loading',
+        fullscreen: 'false',
+      })
+    } else if (this.loadingInstance) {
+      this.loadingInstance.close()
+      this.loadingInstance = null
+    }
   },
 }
 </script>
@@ -47,5 +62,9 @@ export default {
 }
 .tasks__empty {
   text-align: center;
+}
+.tasks__loading {
+  width: 100%;
+  height: 300px;
 }
 </style>
