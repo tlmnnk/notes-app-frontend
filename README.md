@@ -1,24 +1,12 @@
 # notes-app-frontend
 
-## Project setup
-```
-npm install
-```
+App deployed to netlify
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+[https://sleepy-dijkstra-8551fa.netlify.app/](https://sleepy-dijkstra-8551fa.netlify.app/)
 
-### Compiles and minifies for production
-```
-npm run build
-```
+## backend
 
-### Lints and fixes files
-```
-npm run lint
-```
+Deployed to heroku
+[https://warm-crag-82428.herokuapp.com/](https://warm-crag-82428.herokuapp.com/)
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+backend repo [https://github.com/tlmnnk/notes-app-backend/](https://github.com/tlmnnk/notes-app-backend/)
