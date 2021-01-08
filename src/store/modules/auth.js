@@ -32,6 +32,8 @@ export default {
   },
   mutations: {
     [REGISTER_START](state) {
+      state.errors = null
+      state.user = null
       state.isLoading = true
     },
     [REGISTER_FAILURE](state, payload) {

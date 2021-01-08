@@ -23,6 +23,7 @@
 </template>
 
 <script>
+import { Notification } from 'element-ui'
 import { passValidator } from '../helpers/passValidator'
 import { mapGetters, mapActions } from 'vuex'
 
@@ -46,21 +47,38 @@ export default {
     },
   }),
   computed: {
-    ...mapGetters('auth', ['isLoading']),
+    ...mapGetters('auth', ['isLoading', 'getErrors']),
   },
   methods: {
     ...mapActions('auth', ['register']),
     submitForm(formName) {
-      this.$refs[formName].validate((valid) => {
+      this.$refs[formName].validate(async (valid) => {
         if (valid) {
-          this.register({
+          await this.register({
             email: this.regFormData.email,
             password: this.regFormData.password,
           })
-          this.$router.push({ name: 'Tasks' })
+          if (!this.getErrors) {
+            this.$router.push({ name: 'Tasks' })
+          } else {
+            this.errorMessages()
+          }
         } else {
           return false
         }
+      })
+    },
+    errorMessages() {
+      Object.entries(this.getErrors).forEach(([key, error]) => {
+        setTimeout(() => {
+          Notification({
+            title: 'Error',
+            message: `${key}: ${error}`,
+            type: 'error',
+            closable: true,
+            duration: 5000,
+          })
+        }, 0)
       })
     },
   },
