@@ -8,8 +8,9 @@
         <el-input type="password" v-model="loginData.password" autocomplete="off"></el-input>
       </el-form-item>
       <el-form-item class="login__btn">
-        <el-button type="primary" :disabled="isLoading" @click="submitForm('loginData')">
-          Login
+        <el-button type="primary" :loading="isLoading" @click="submitForm('loginData')">
+          <span v-if="isLoggedIn">Go to my Notes</span>
+          <span v-else>Login</span>
         </el-button>
       </el-form-item>
     </el-form>
@@ -40,11 +41,15 @@ export default {
     },
   }),
   computed: {
-    ...mapGetters('auth', ['isLoading', 'getErrors']),
+    ...mapGetters('auth', ['isLoading', 'getErrors', 'isLoggedIn']),
   },
   methods: {
     ...mapActions('auth', ['login']),
     submitForm(formName) {
+      if (this.isLoggedIn) {
+        this.$router.push({ name: 'Tasks' })
+        return
+      }
       this.$refs[formName].validate(async (valid) => {
         if (valid) {
           await this.login({
